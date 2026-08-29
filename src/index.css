@@ -170,6 +170,9 @@ html.dark {
 html:not(.dark) .bg-\[\#09090b\] {
   background-color: #e5e3db !important;
 }
+html:not(.dark) .bg-\[\#0e0e11\] {
+  background-color: #faf9f5 !important;
+}
 html:not(.dark) .bg-\[\#09090b\]\/80 {
   background-color: rgba(229, 227, 219, 0.88) !important;
 }
@@ -184,6 +187,15 @@ html:not(.dark) .bg-\[\#18181b\]\/70 {
 }
 html:not(.dark) .bg-\[\#18181b\]\/50 {
   background-color: rgba(240, 238, 230, 0.6) !important;
+}
+html:not(.dark) .bg-\[\#141418\] {
+  background-color: #f3f0e8 !important;
+}
+html:not(.dark) .bg-\[\#141418\]\/50 {
+  background-color: rgba(243, 240, 232, 0.72) !important;
+}
+html:not(.dark) .bg-\[\#141418\]\/30 {
+  background-color: rgba(243, 240, 232, 0.52) !important;
 }
 html:not(.dark) .bg-\[\#1c1c20\] {
   background-color: #efece3 !important;
@@ -478,5 +490,4 @@ html:not(.dark) .bg-green-500\/10 {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.4);
 }
-
 
