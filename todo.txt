@@ -1,0 +1,108 @@
+SIDEQUEST — QA / REMAINING WORK
+================================
+
+AUDIT DATE:
+2026-08-28
+
+BUILD STATUS:
+PASS
+
+ROUTES TESTED:
+/ (Dashboard)
+/focus (Focus Mode)
+/projects (Projects Index)
+/projects/:projectId (Project Detail & Quests)
+/history (History & Maintenance Log)
+/achievements (Achievements & Player Profile)
+/demo (Judge Mode & WebMCP Observability Suite)
+/settings (Settings & Local-first Data Management)
+/* (404 Fallback Page)
+
+WEBMCP STATUS:
+28 / 28 tools registered via document.modelContext with readOnly hints, parameter schemas, execution timers, state snapshot differencing, and runtime fallback for standard browsers.
+
+CRITICAL
+--------
+(No blocking or crashing critical bugs detected. Build compiles cleanly and all core user loops execute with error boundaries and storage isolation.)
+
+HIGH
+----
+[X] `/projects/:projectId`: When deleting a Quest that is currently set as the active Main Quest, ensure all UI components (Dashboard, Focus Page, Sidebar Next Action card) immediately clear active main quest references without requiring manual page navigation or reload.
+[X] `/focus`: In background tabs where browser requestAnimationFrame/setInterval timers may be heavily throttled by browser power-saving, verify high-precision timestamp delta reconciliation on focus session completion.
+
+MEDIUM
+------
+[X] `/settings`: Add an optional visual confirmation modal showing line item counts (Quests, Focus Sessions, XP Events) before importing a backup JSON over an existing workspace.
+[X] `/projects`: Implement inline drag-and-drop or explicit keyboard shortcut reordering for Quest Cards inside Project Detail view in addition to the existing micro-step reordering controls.
+[X] `/demo`: Add a one-click "Run All Scenario Tools" sequence runner in DevToolTester to let judges preview the full 7-step scenario completion in a single automated batch without clicking each prompt individually.
+
+LOW / POLISH
+------------
+[X] `/history`: Add a quick date-range filter (Today, This Week, All Time) in the history view for users with high volumes of focus sprint records.
+[X] `/achievements`: Add subtle sound effect triggers (optional in settings) upon unlocking a new achievement milestone badge.
+[X] Theme Toggle: Ensure smooth color-scheme CSS transition across all shadcn modal overlays during instant dark/light theme switching.
+
+WEBMCP
+------
+[X] `document.modelContext`: Validate tool registration error handling if a future browser extension injects a conflicting modelContext implementation without full JSON-RPC method conformance.
+[X] `make_next_action_smaller`: Add optional suggested template prompts in tool description to guide agent LLMs to produce sub-2-minute action descriptions.
+[X] Agent Activity Timeline: Add an export button to allow developers and judges to download the session's recorded agent tool execution timeline as JSON for benchmarking.
+
+MOBILE / RESPONSIVE
+-------------------
+[X] Mobile Viewport (< 400px): Verify that the Player HUD rank badge and combo streak in TopBar gracefully collapse on narrow phone screens to prevent horizontal scrollbars.
+[X] Mobile Sheet Navigation: Ensure touch swipe-to-close gesture is smooth on mobile Safari when navigating between Projects and Focus.
+
+ACCESSIBILITY
+-------------
+[X] Ensure all icon-only buttons in the Quest step list and DevToolTester have descriptive `aria-label` tags and focus-visible outlines for screen-reader users.
+[X] Test high-contrast color scheme mode with WCAG AA compliance on subtle muted-foreground badge labels.
+
+PRODUCTION / NETLIFY
+--------------------
+[X] Production build verified: `dist/` bundle created with `index.html` entry point and full asset bundling.
+[X] SPA 200 redirect rules confirmed in both `netlify.toml` and `public/_redirects`.
+
+OPTIONAL FUTURE
+---------------
+[ ] Audio ambient white-noise / binaural beat synthesizer option during active focus sessions.
+[ ] PWA Web App Manifest and offline service worker caching for complete offline flight mode usage.
+[ ] Multi-device WebRTC / local peer sync for syncing offline workspaces between desktop and mobile without cloud servers.
+
+VERIFIED WORKING
+----------------
+- Single-view responsive Dashboard with Main Quest HUD, Next Action card, and quick side quest parking
+- Strict single Main Quest constraint enforcement across all projects and views
+- Quest CRUD with priority levels, estimated durations, and manual/step-derived progress
+- Quest Step System: Add, edit, delete, reorder, mark tiny step, complete, and reopen
+- Progress calculation accurately derived from step completion ratio
+- Unstuck breakdown: "Make Smaller" (inserts sub-step) and "Skip for Now" (reorders step queue)
+- Blocker tracking: Set blocker, display warning in Dashboard & Focus, clear blocker
+- Focus Mode: Duration selection (15/25/45/60m), countdown timer, high-precision pause/resume, overtime handling, times-up prompt
+- Distraction Resilience: Quick Side Quest capture from TopBar and Focus without interrupting timer
+- Side Quest Parking Lot: Dismiss, delete, and promote to full Project Quest
+- Context Keeper: Save work context, record optional interruption notes, retrieve latest snapshot
+- "Resume Me" workflow: Restores mental context after interruptions without overriding newer quest progress
+- Recovery System: Water, Movement, Stretch, Eye Break, Bio Break, and General Break logs
+- Recovery Prompts: Non-medical, optional reminders with Snooze, Skip, and Start Timer
+- Combo Streak Counter: Increments on real work, protected during recovery breaks and pauses
+- Gamification Engine: XP rewards for steps, quests, main quests, focus sessions, unstuck actions, and recovery
+- Anti-Farming Protection: Reopening and re-completing steps/quests prevents duplicate XP awards
+- Level System: 10 level ranks derived mathematically from XP thresholds with celebratory Level-Up dialog
+- Achievement System: 10 distinct achievement badges with progress tracking and unlock date persistence
+- History View: Chronological focus sessions, recovery logs, and XP victory events with category filters
+- Settings Page: Theme toggle (Light/Dark/System), reduced motion toggle, sound toggle, recovery preferences
+- Local-first Persistence: Versioned schema in `sidequest:v1` namespace, auto-saving snapshot state
+- Backup Export: Generates downloadable valid `sidequest-backup-YYYY-MM-DD.json`
+- Backup Import: Validates payload envelope, migrates data, and safely restores state
+- Clear Local Data: Destructively resets only SIDEQUEST namespace keys, strictly avoiding `localStorage.clear()`
+- Demo Workspace Seeding: Deterministic test dataset in `sidequest:demo:v1`
+- Judge Mode (/demo): Isolated workspace, copyable prompt cards, scenario tracker, agent timeline, dev tester
+- WebMCP Protocol: 28 tools registered with `document.modelContext`, runtime safe wrappers, snapshot diffs
+- Responsive Layout: Desktop collapsible sidebar, mobile Sheet drawer navigation, fluid containers
+- Netlify Readiness: `netlify.toml` and `public/_redirects` configured for single-page app routing
+
+UNVERIFIED
+----------
+[ ] Test WebMCP tool execution inside live ChatGPT in-app browser environment with native `document.modelContext` runtime bridge.
+[ ] Web Audio API audio synthesis playback on iOS Safari devices with strict background audio auto-play restrictions.

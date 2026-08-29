@@ -1,0 +1,6 @@
+{
+  "name": "Sidequest",
+  "description": "Gamified productivity workspace designed for distraction-prone and nonlinear work styles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

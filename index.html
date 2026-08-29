@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Suppress injected browser extension noise (e.g. MetaMask / Web3 / wallet connection failures in iframe)
+      (function() {
+        function isExtensionNoise(err) {
+          if (!err) return false;
+          var msg = (typeof err === "string" ? err : (err.message || err.description || err.name || String(err))).toLowerCase();
+          var stack = (err && err.stack ? String(err.stack).toLowerCase() : "");
+          return (
+            msg.includes("metamask") ||
+            msg.includes("ethereum") ||
+            msg.includes("web3") ||
+            msg.includes("coinbase") ||
+            msg.includes("wallet") ||
+            msg.includes("failed to connect") ||
+            stack.includes("chrome-extension://") ||
+            stack.includes("moz-extension://")
+          );
+        }
+
+        window.addEventListener("unhandledrejection", function(event) {
+          if (isExtensionNoise(event.reason) || isExtensionNoise(event.reason && event.reason.message)) {
+            event.preventDefault();
+            event.stopImmediatePropagation && event.stopImmediatePropagation();
+          }
+        }, true);
+
+        window.addEventListener("error", function(event) {
+          if (
+            isExtensionNoise(event.message) ||
+            isExtensionNoise(event.error) ||
+            (event.filename && (event.filename.indexOf("extension") !== -1 || event.filename.indexOf("chrome-extension") !== -1 || event.filename.indexOf("moz-extension") !== -1))
+          ) {
+            event.preventDefault();
+            event.stopImmediatePropagation && event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+
+        // Apply saved theme immediately to avoid flash of wrong mode
+        try {
+          var savedTheme = localStorage.getItem("sidequest-theme");
+          var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var isDark = savedTheme === "dark" || (savedTheme === "system" ? prefersDark : (!savedTheme || prefersDark));
+          if (isDark) {
+            document.documentElement.classList.add("dark");
+            document.documentElement.classList.remove("light");
+            document.documentElement.style.colorScheme = "dark";
+          } else {
+            document.documentElement.classList.remove("dark");
+            document.documentElement.classList.add("light");
+            document.documentElement.style.colorScheme = "light";
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>Sidequest - Stay on the main quest</title>
+    <meta name="description" content="Gamified productivity workspace designed for distraction-prone and nonlinear work styles." />
+    <meta property="og:title" content="Sidequest" />
+    <meta property="og:description" content="Gamified productivity workspace designed for distraction-prone and nonlinear work styles." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
