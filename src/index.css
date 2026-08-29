@@ -173,6 +173,12 @@ html:not(.dark) .bg-\[\#09090b\] {
 html:not(.dark) .bg-\[\#0e0e11\] {
   background-color: #faf9f5 !important;
 }
+html:not(.dark) .bg-\[\#0c0c0e\] {
+  background-color: #ece8de !important;
+}
+html:not(.dark) .bg-\[\#0d1410\] {
+  background-color: #edf7ef !important;
+}
 html:not(.dark) .bg-\[\#09090b\]\/80 {
   background-color: rgba(229, 227, 219, 0.88) !important;
 }
@@ -213,6 +219,15 @@ html:not(.dark) .border-\[\#27272a\] {
 }
 html:not(.dark) .border-\[\#3f3f46\] {
   border-color: #b8b3a5 !important;
+}
+
+html:not(.dark) .from-\[\#141418\] {
+  --tw-gradient-from: #f3f0e8 var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(243 240 232 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+html:not(.dark) .to-\[\#09090b\] {
+  --tw-gradient-to: #e5e3db var(--tw-gradient-to-position) !important;
 }
 
 /* Classical Greek Typography Hierarchy */
@@ -490,4 +505,3 @@ html:not(.dark) .bg-green-500\/10 {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.4);
 }
-
