@@ -9,7 +9,7 @@
 
 **SIDEQUEST** is a local-first, distraction-resilient workspace built to solve the core cognitive breakdown in self-directed work: losing the Main Quest to tangent distractions.
 
-For the **WebMCP Challenge**, SIDEQUEST exposes **28 browser-native WebMCP tools** via `document.modelContext`, allowing browser agents (like ChatGPT with WebMCP, or custom agent runtimes) to observe and interact with the user's active productivity context with zero brittle DOM clicking.
+For the **WebMCP Challenge**, SIDEQUEST exposes **36 browser-native WebMCP tools** via `document.modelContext` (falling back to the legacy `navigator.modelContext` on pre-Chrome-150 runtimes), allowing browser agents (like ChatGPT with WebMCP, or custom agent runtimes) to observe and interact with the user's active productivity context with zero brittle DOM clicking.
 
 ---
 
@@ -30,7 +30,7 @@ For the **WebMCP Challenge**, SIDEQUEST exposes **28 browser-native WebMCP tools
 
 ---
 
-## 🛠️ WebMCP Architecture & 28 Registered Tools
+## 🛠️ WebMCP Architecture & 36 Registered Tools
 
 ### Protocol Integration
 ```
@@ -40,21 +40,26 @@ For the **WebMCP Challenge**, SIDEQUEST exposes **28 browser-native WebMCP tools
 [document.modelContext]
         │
         ▼
-[SIDEQUEST WebMCP Registry (28 Tools)]
+[SIDEQUEST WebMCP Registry (36 Tools)]
         │
-        ├─► Work & Quests (12 Tools)
-        ├─► Focus Session (5 Tools)
+        ├─► Work, Quests, Daily Loadout & Boss Mode (16 Tools)
+        ├─► Focus Session & Challenges (7 Tools)
+        ├─► Side Quest Parking Lot & Daily Side Missions (4 Tools)
         ├─► Context Keeper (3 Tools)
-        ├─► Side Quest Parking Lot (3 Tools)
         ├─► Recovery & Physical Well-being (3 Tools)
-        └─► Player State & XP (2 Tools)
+        └─► Player State, XP & Skill Tree (3 Tools)
         │
         ▼
 [React State Store & Storage Isolation (sidequest:demo:v1)]
 ```
 
+### Spec Conformance
+- **Response envelope**: every `execute` resolves to `{ content: [{ type: "text", text }] }`, with `isError: true` set on failures.
+- **Dual API name**: resolves `document.modelContext` first, then the deprecated `navigator.modelContext` alias, so older agent runtimes still connect.
+- **Single source of truth**: every tool count shown in the UI is read from the live registry, not hardcoded.
+
 ### Safety & Guardrails
-- **Read-Only / Mutation Classification**: All tools are strictly annotated with `readOnlyHint` and categorized for agent transparency.
+- **Read-Only / Mutation Classification**: all 36 tools are annotated with `readOnlyHint` and categorized (15 read, 21 mutation) for agent transparency.
 - **State Snapshot Differencing**: Every mutation captures before-and-after snapshots (Main Quest, Next Action, Progress, Focus Timer, Parked Count).
 - **Protected Human-Only Actions**: Dangerous operations (`clearLocalData`, `importBackup`, `resetNamespace`) are excluded from WebMCP tool exposure.
 
@@ -69,3 +74,9 @@ For the **WebMCP Challenge**, SIDEQUEST exposes **28 browser-native WebMCP tools
 - **Lucide React**
 - **WebMCP** (`document.modelContext`)
 - **localStorage** with isolated storage namespaces
+
+---
+
+## 📄 License
+
+Released under the [MIT License](./LICENSE).

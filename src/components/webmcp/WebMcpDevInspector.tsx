@@ -2,6 +2,7 @@ import * as React from "react";
 import { Terminal, ChevronDown, ChevronRight, Play, CheckCircle2, AlertCircle, Copy } from "lucide-react";
 import { useWebMcp } from "@/hooks/useWebMcp";
 import { Button } from "@/components/ui/button";
+import { readToolOutput } from "@/webmcp/tool-results";
 
 export function WebMcpDevInspector() {
   // Only render in development mode
@@ -22,7 +23,7 @@ export function WebMcpDevInspector() {
     try {
       // Execute with empty object as test input
       const res = await selectedTool.execute({});
-      setTestResult(typeof res === "string" ? res : JSON.stringify(res, null, 2));
+      setTestResult(JSON.stringify(readToolOutput(res), null, 2));
     } catch (err: any) {
       setTestResult(JSON.stringify({ error: err?.message || String(err) }, null, 2));
     } finally {

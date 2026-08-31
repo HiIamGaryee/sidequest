@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { getRegisteredTools } from "@/webmcp/register-tools";
 import type { WebMcpToolDefinition } from "@/types/webmcp.d";
 import { TOOL_METADATA_MAP } from "@/webmcp/webmcp-utils";
+import { readToolOutput } from "@/webmcp/tool-results";
 
 // Sample prefilled payloads for fast testing
 const SAMPLE_PAYLOADS: Record<string, Record<string, unknown>> = {
@@ -46,7 +47,7 @@ const SAMPLE_PAYLOADS: Record<string, Record<string, unknown>> = {
   },
   save_work_context: {
     questId: "quest-demo-finish-webmcp",
-    note: "All 28 tools verified in Judge Mode test runner.",
+    note: "All WebMCP tools verified in Judge Mode test runner.",
   },
   get_resumable_context: {},
   resume_work_context: {},
@@ -153,7 +154,7 @@ export function DevToolTester({ initialToolName, onToolExecuted }: DevToolTester
       const result = await tool.execute(parsedInput);
       const elapsed = Math.max(1, Math.round(performance.now() - start));
       setDurationMs(elapsed);
-      setOutputJson(result);
+      setOutputJson(JSON.stringify(readToolOutput(result), null, 2));
       if (onToolExecuted) {
         onToolExecuted(selectedToolName);
       }
@@ -199,9 +200,14 @@ export function DevToolTester({ initialToolName, onToolExecuted }: DevToolTester
       try {
         const res = await tool.execute(scenario.input);
         const elapsed = Math.max(1, Math.round(performance.now() - start));
-        const parsed = JSON.parse(res);
+        const parsed = readToolOutput(res);
         const passed = parsed.success !== false;
-        results.push({ tool: scenario.tool, passed, durationMs: elapsed, error: parsed.error?.message });
+        results.push({
+          tool: scenario.tool,
+          passed,
+          durationMs: elapsed,
+          error: parsed.success === false ? parsed.error?.message : undefined,
+        });
         if (onToolExecuted) {
           onToolExecuted(scenario.tool);
         }
@@ -243,7 +249,7 @@ export function DevToolTester({ initialToolName, onToolExecuted }: DevToolTester
             <h3 id="tool-tester-heading" className="text-sm font-semibold text-foreground tracking-tight flex items-center gap-2">
               Interactive WebMCP Tool Runner
               <span className="text-[10px] font-mono font-medium px-2 py-0.2 rounded-full bg-secondary text-muted-foreground border border-border/60">
-                28 Tools Active
+                {tools.length} Tools Active
               </span>
             </h3>
             <p className="text-xs text-muted-foreground">

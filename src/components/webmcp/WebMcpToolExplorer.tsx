@@ -18,7 +18,7 @@ import { TOOL_METADATA_MAP } from "@/webmcp/webmcp-utils";
 import type { ToolCategory } from "@/types/webmcp";
 
 const CATEGORIES: { id: string; label: string }[] = [
-  { id: "all", label: "All (28)" },
+  { id: "all", label: "All" },
   { id: "WORK", label: "Work & Quests" },
   { id: "FOCUS", label: "Focus Timer" },
   { id: "CONTEXT", label: "Context Keeper" },
@@ -91,7 +91,7 @@ export function WebMcpToolExplorer({ onSelectToolForTesting }: WebMcpToolExplore
             <h3 id="tool-explorer-heading" className="text-sm font-semibold text-foreground tracking-tight flex items-center gap-2">
               WebMCP Tool Explorer
               <span className="text-[11px] font-mono px-2 py-0.2 rounded-full bg-sky-500/10 text-sky-500 dark:text-sky-400 border border-sky-500/20">
-                28 Registered Tools
+                {tools.length} Registered Tools
               </span>
             </h3>
             <p className="text-xs text-muted-foreground">

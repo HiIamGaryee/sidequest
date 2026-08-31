@@ -1,4 +1,4 @@
-import type { WebMcpToolDefinition } from "@/types/webmcp.d";
+import type { ModelContext, WebMcpToolDefinition, WebMcpToolResponse } from "@/types/webmcp.d";
 import type {
   ToolCategory,
   ActionType,
@@ -43,18 +43,42 @@ export const TOOL_METADATA_MAP: Record<string, { category: ToolCategory; actionT
 
   get_player_state: { category: "PLAYER", actionType: "read" },
   get_session_summary: { category: "PLAYER", actionType: "read" },
+  get_skill_tree: { category: "PLAYER", actionType: "read" },
+
+  get_today_loadout: { category: "WORK", actionType: "read" },
+  set_daily_main_mission: { category: "WORK", actionType: "mutation" },
+  add_daily_side_mission: { category: "SIDE QUEST", actionType: "mutation" },
+
+  get_boss_state: { category: "WORK", actionType: "read" },
+  toggle_boss_mode: { category: "WORK", actionType: "mutation" },
+
+  start_challenge: { category: "FOCUS", actionType: "mutation" },
+  get_challenge_state: { category: "FOCUS", actionType: "read" },
 };
 
 /**
- * Feature detection for standard WebMCP API.
- * Uses document.modelContext (NOT deprecated navigator.modelContext).
+ * Resolves the WebMCP entry point.
+ * `document.modelContext` is the current API; `navigator.modelContext` is the
+ * pre-Chrome-150 name and is still what older agent runtimes expose, so both
+ * are accepted with the current one taking precedence.
  */
+export function getModelContext(): ModelContext | undefined {
+  const fromDocument = typeof document !== "undefined" ? document.modelContext : undefined;
+  if (fromDocument && typeof fromDocument.registerTool === "function") {
+    return fromDocument;
+  }
+
+  const fromNavigator = typeof navigator !== "undefined" ? navigator.modelContext : undefined;
+  if (fromNavigator && typeof fromNavigator.registerTool === "function") {
+    return fromNavigator;
+  }
+
+  return undefined;
+}
+
+/** Feature detection for the standard WebMCP API, under either name. */
 export function isWebMcpSupported(): boolean {
-  if (typeof document === "undefined") return false;
-  return Boolean(
-    document.modelContext &&
-    typeof document.modelContext.registerTool === "function"
-  );
+  return Boolean(getModelContext());
 }
 
 let activeStoresRef: (() => StoresRef) | null = null;
@@ -101,12 +125,12 @@ export function createSafeExecute<TInput = Record<string, unknown>, TOutput = un
     category?: ToolCategory;
     actionType?: ActionType;
   }
-): (input: TInput) => Promise<string> {
+): (input: TInput) => Promise<WebMcpToolResponse> {
   const meta = TOOL_METADATA_MAP[toolName] || { category: "WORK", actionType: "read" };
   const category = options?.category || meta.category;
   const actionType = options?.actionType || meta.actionType;
 
-  return async (input: TInput): Promise<string> => {
+  return async (input: TInput): Promise<WebMcpToolResponse> => {
     const startTime = performance.now();
     const beforeState = actionType === "mutation" ? captureSnapshot() : undefined;
 
@@ -191,10 +215,11 @@ export function createSafeExecute<TInput = Record<string, unknown>, TOutput = un
  * Inspect registered tools in the browser if supported.
  */
 export async function getRegisteredWebMcpTools(): Promise<WebMcpToolDefinition<any, any>[]> {
-  if (!isWebMcpSupported()) return [];
+  const modelContext = getModelContext();
+  if (!modelContext) return [];
   try {
-    if (typeof document.modelContext?.getTools === "function") {
-      const tools = await document.modelContext.getTools();
+    if (typeof modelContext.getTools === "function") {
+      const tools = await modelContext.getTools();
       return Array.isArray(tools) ? tools : [];
     }
   } catch (e) {
@@ -216,7 +241,7 @@ export function getDemoReadiness(stores: StoresRef, isJudgeModeActive: boolean):
   return {
     isSupported,
     isRegistered: true,
-    toolCount: 28,
+    toolCount: Object.keys(TOOL_METADATA_MAP).length,
     isDemoDataActive: isJudgeModeActive,
     hasMainQuest: Boolean(mainQuest),
     hasResumableContext: Boolean(resumable),

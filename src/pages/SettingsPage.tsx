@@ -36,6 +36,7 @@ import {
 import { useTheme } from "@/stores/ThemeContext";
 import { usePersistence } from "@/stores/PersistenceContext";
 import { useRecovery } from "@/hooks/useRecovery";
+import { useWebMcp } from "@/hooks/useWebMcp";
 import { RECOVERY_INTERVALS } from "@/config/recovery";
 import { WebMcpStatusCard } from "@/components/webmcp/WebMcpStatusCard";
 import { WebMcpDevInspector } from "@/components/webmcp/WebMcpDevInspector";
@@ -44,6 +45,7 @@ import { FirstRunOnboarding } from "@/components/onboarding/FirstRunOnboarding";
 export function SettingsPage() {
   const { theme, resolvedTheme, reducedMotion, setReducedMotion } = useTheme();
   const { preferences, updatePreferences } = useRecovery();
+  const { registeredCount } = useWebMcp();
   const {
     lastSavedAt,
     isDemoData,
@@ -364,7 +366,7 @@ export function SettingsPage() {
           {/* WebMCP Agent Integration Section */}
           <SectionCard
             title="WebMCP Agent Integration"
-            description="Exposes 21 native tools to browser agents via document.modelContext."
+            description={`Exposes ${registeredCount} native tools to browser agents via document.modelContext.`}
             headerAction={
               <div className="flex items-center gap-1.5 text-xs text-sky-400 font-mono">
                 <Bot className="h-3.5 w-3.5" />

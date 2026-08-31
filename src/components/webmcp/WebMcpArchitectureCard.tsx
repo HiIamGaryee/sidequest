@@ -1,6 +1,9 @@
 import { ArrowRight, Bot, Cpu, Layers, HardDrive, ShieldCheck } from "lucide-react";
+import { useWebMcp } from "@/hooks/useWebMcp";
 
 export function WebMcpArchitectureCard() {
+  const { registeredCount } = useWebMcp();
+
   return (
     <section
       id="webmcp-architecture-card"
@@ -55,7 +58,7 @@ export function WebMcpArchitectureCard() {
             <HardDrive className="w-5 h-5" />
           </div>
           <div className="font-bold text-foreground">SIDEQUEST Engine</div>
-          <div className="text-[10px] text-muted-foreground">28 Tools • State Dispatches • LocalStorage</div>
+          <div className="text-[10px] text-muted-foreground">{registeredCount} Tools • State Dispatches • LocalStorage</div>
         </div>
       </div>
 
@@ -67,7 +70,7 @@ export function WebMcpArchitectureCard() {
             Deterministic Schemas
           </div>
           <p className="text-[11px] text-muted-foreground leading-relaxed">
-            All 28 tools define exact JSON input/output schemas, eliminating fuzzy DOM guessing.
+            All {registeredCount} tools define exact JSON input/output schemas, eliminating fuzzy DOM guessing.
           </p>
         </div>
 
