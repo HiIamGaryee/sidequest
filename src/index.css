@@ -2,44 +2,44 @@
 
 @layer base {
   :root {
-    /* Light Mode Tokens: Greek Plaster & Aegean Ultramarine Theme */
-    --background: 45 14% 88.5%; /* #e5e3db - Warm Alabaster / Limestone Plaster */
-    --foreground: 221 100% 36.5%; /* #0047ba - Greek Royal Ultramarine Blue */
+    /* Light Mode Tokens: Warm Off-White Workspace + Cobalt Interactions */
+    --background: 50 27% 96%; /* #f7f6f1 - Warm Off-White Page */
+    --foreground: 215 55% 21%; /* #183153 - Ink Navy (text primary) */
 
-    --card: 45 28% 97.5%; /* #faf9f5 - Sculpted Plaster Ivory White */
-    --card-foreground: 221 84% 28%; /* #0b3b82 - Deep Aegean Ink */
+    --card: 0 0% 100%; /* #ffffff - Main Surface / Card */
+    --card-foreground: 215 55% 21%; /* #183153 */
 
-    --popover: 45 28% 97.5%; /* #faf9f5 */
-    --popover-foreground: 221 100% 36.5%; /* #0047ba */
+    --popover: 0 0% 100%; /* #ffffff */
+    --popover-foreground: 215 55% 21%; /* #183153 */
 
-    --primary: 221 100% 36.5%; /* #0047ba - Aegean Blue */
-    --primary-foreground: 45 28% 98%; /* #faf9f5 - Plaster White */
+    --primary: 220 90% 42%; /* #0b4ccb - Primary Blue */
+    --primary-foreground: 0 0% 100%; /* #ffffff */
 
-    --secondary: 218 60% 94%; /* #eaf1fc - Soft Aegean Mist */
-    --secondary-foreground: 221 100% 36.5%; /* #0047ba */
+    --secondary: 215 100% 97%; /* #eef5ff - Soft Blue Surface */
+    --secondary-foreground: 220 90% 42%; /* #0b4ccb */
 
-    --muted: 45 14% 83%; /* #dedbd0 - Limestone Muted */
-    --muted-foreground: 218 36% 49%; /* #5076aa - Muted Aegean Slate */
+    --muted: 51 20% 93%; /* #f1f0ea - Secondary Surface */
+    --muted-foreground: 215 17% 45%; /* #5f6f86 - Text Secondary */
 
-    --accent: 218 60% 93%; /* #e3edfa */
-    --accent-foreground: 221 100% 36.5%; /* #0047ba */
+    --accent: 215 100% 97%; /* #eef5ff */
+    --accent-foreground: 220 90% 42%; /* #0b4ccb */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 355 77% 61%; /* #e84d5b - Danger */
+    --destructive-foreground: 0 0% 100%; /* #ffffff */
 
-    --border: 45 12% 80%; /* #d3cfc4 - Limestone Border */
-    --input: 45 12% 80%;
-    --ring: 221 100% 36.5%;
+    --border: 219 23% 88%; /* #d9dee7 - Border */
+    --input: 219 23% 88%; /* #d9dee7 */
+    --ring: 220 90% 42%; /* #0b4ccb */
 
     --radius: 0.5rem;
 
     /* RPG HUD tokens */
-    --xp: 221 100% 36.5%;
-    --xp-foreground: 45 28% 98%;
-    --focus: 221 100% 36.5%;
-    --focus-foreground: 45 28% 98%;
-    --success: 142 71% 40%;
-    --warning: 38 92% 45%;
+    --xp: 42 92% 54%; /* #f6b51b - Amber XP / Level */
+    --xp-foreground: 215 55% 21%; /* #183153 */
+    --focus: 220 90% 42%; /* #0b4ccb */
+    --focus-foreground: 0 0% 100%; /* #ffffff */
+    --success: 156 78% 41%; /* #17b978 */
+    --warning: 42 92% 54%; /* #f6b51b */
   }
 
   .dark {
@@ -157,129 +157,421 @@
   }
 }
 
-/* Light mode overrides: Greek Limestone Plaster (#E5E3DB) + Royal Aegean Ultramarine (#0047BA) */
+/* ==========================================================================
+   LIGHT THEME LAYER
+   Warm off-white workspace + white cards + cobalt interactions.
+   Every rule is gated on `html:not(.dark)` so Dark Theme is untouched.
+   ========================================================================== */
+
 html:not(.dark) {
   color-scheme: light;
+
+  /* Single source of truth for light-mode surfaces, ink and status colors */
+  --lt-page: #f7f6f1;
+  --lt-surface: #ffffff;
+  --lt-surface-2: #f1f0ea;
+  --lt-surface-inset: #f7f9fc;
+
+  --lt-blue-surface: #eef5ff;
+  --lt-blue-border: #bfd7ff;
+  --lt-cyan-surface: #eafbff;
+  --lt-cyan-border: #b6e9f9;
+  --lt-green-surface: #ecfbf4;
+  --lt-green-border: #bdedd5;
+  --lt-amber-surface: #fff8e6;
+  --lt-amber-border: #f2ddaa;
+  --lt-red-surface: #fff3f4;
+  --lt-red-border: #f6c4ca;
+
+  --lt-primary: #0b4ccb;
+  --lt-primary-hover: #083fa8;
+  --lt-cyan: #0b8fd3;
+  --lt-cyan-ink: #0a7ea9;
+  --lt-amber-ink: #b8790a;
+  --lt-success: #17b978;
+  --lt-success-ink: #0f8f5c;
+  --lt-danger: #e84d5b;
+  --lt-danger-ink: #d83b4b;
+  --lt-danger-body: #7c5a5f;
+
+  --lt-text: #183153;
+  --lt-text-2: #5f6f86;
+  --lt-text-3: #8a94a6;
+  --lt-border: #d9dee7;
+  --lt-border-hover: #b8c4d6;
+  --lt-border-strong: #c8cfdb;
+
+  --lt-disabled-bg: #f4f5f7;
+  --lt-disabled-text: #a1a8b4;
+  --lt-disabled-border: #e0e3e8;
 }
 
 html.dark {
   color-scheme: dark;
 }
 
-/* Surfaces & Containers */
-html:not(.dark) .bg-\[\#09090b\] {
-  background-color: #e5e3db !important;
+/* --------------------------------------------------------------------------
+   1. Surfaces — dark HUD hexes remapped to clean light surfaces
+   -------------------------------------------------------------------------- */
+html:not(.dark) .bg-\[\#09090b\],
+html:not(.dark) .bg-\[\#121215\] {
+  background-color: var(--lt-surface-inset) !important;
 }
-html:not(.dark) .bg-\[\#0e0e11\] {
-  background-color: #faf9f5 !important;
-}
-html:not(.dark) .bg-\[\#0c0c0e\] {
-  background-color: #ece8de !important;
-}
-html:not(.dark) .bg-\[\#0d1410\] {
-  background-color: #edf7ef !important;
+html:not(.dark) .bg-\[\#09090b\]\/60 {
+  background-color: rgba(247, 249, 252, 0.7) !important;
 }
 html:not(.dark) .bg-\[\#09090b\]\/80 {
-  background-color: rgba(229, 227, 219, 0.88) !important;
+  background-color: rgba(247, 246, 241, 0.88) !important;
 }
 html:not(.dark) .bg-\[\#09090b\]\/90 {
-  background-color: rgba(229, 227, 219, 0.95) !important;
+  background-color: rgba(247, 246, 241, 0.95) !important;
 }
-html:not(.dark) .bg-\[\#18181b\] {
-  background-color: #faf9f5 !important;
+html:not(.dark) .bg-\[\#18181b\],
+html:not(.dark) .bg-\[\#0e0e11\] {
+  background-color: var(--lt-surface) !important;
 }
 html:not(.dark) .bg-\[\#18181b\]\/70 {
-  background-color: rgba(250, 249, 245, 0.75) !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
 }
 html:not(.dark) .bg-\[\#18181b\]\/50 {
-  background-color: rgba(240, 238, 230, 0.6) !important;
+  background-color: rgba(241, 240, 234, 0.6) !important;
 }
-html:not(.dark) .bg-\[\#141418\] {
-  background-color: #f3f0e8 !important;
+html:not(.dark) .bg-\[\#141418\],
+html:not(.dark) .bg-\[\#1c1c20\],
+html:not(.dark) .bg-\[\#0c0c0e\] {
+  background-color: var(--lt-surface-2) !important;
 }
 html:not(.dark) .bg-\[\#141418\]\/50 {
-  background-color: rgba(243, 240, 232, 0.72) !important;
+  background-color: rgba(241, 240, 234, 0.72) !important;
 }
 html:not(.dark) .bg-\[\#141418\]\/30 {
-  background-color: rgba(243, 240, 232, 0.52) !important;
-}
-html:not(.dark) .bg-\[\#1c1c20\] {
-  background-color: #efece3 !important;
-}
-html:not(.dark) .bg-\[\#121215\] {
-  background-color: #f5f3ec !important;
+  background-color: rgba(241, 240, 234, 0.5) !important;
 }
 html:not(.dark) .bg-\[\#1f1f23\] {
-  background-color: #ebe7de !important;
+  background-color: var(--lt-blue-surface) !important;
+}
+html:not(.dark) .bg-\[\#0d1410\] {
+  background-color: var(--lt-green-surface) !important;
 }
 
-/* Architectural Limestone Borders */
-html:not(.dark) .border-\[\#27272a\] {
-  border-color: #d3cfc4 !important;
+/* Neutral zinc scale (dialogs, chips, inset rows) */
+html:not(.dark) .bg-zinc-950,
+html:not(.dark) .bg-neutral-950,
+html:not(.dark) .bg-black {
+  background-color: var(--lt-surface) !important;
 }
-html:not(.dark) .border-\[\#3f3f46\] {
-  border-color: #b8b3a5 !important;
+html:not(.dark) .bg-zinc-900,
+html:not(.dark) .bg-zinc-800 {
+  background-color: var(--lt-surface-2) !important;
 }
-
-html:not(.dark) .from-\[\#141418\] {
-  --tw-gradient-from: #f3f0e8 var(--tw-gradient-from-position) !important;
-  --tw-gradient-to: rgb(243 240 232 / 0) var(--tw-gradient-to-position) !important;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+html:not(.dark) .bg-zinc-900\/80,
+html:not(.dark) .bg-zinc-900\/50 {
+  background-color: var(--lt-surface-inset) !important;
 }
-html:not(.dark) .to-\[\#09090b\] {
-  --tw-gradient-to: #e5e3db var(--tw-gradient-to-position) !important;
-}
-
-/* Classical Greek Typography Hierarchy */
-/* Primary Headings & Bold Highlights: Royal Aegean Ultramarine Blue */
-html:not(.dark) .text-\[\#fafafa\] {
-  color: #0047ba !important;
-}
-/* Body Copy & Detailed Descriptions: Deep Aegean Navy Ink */
-html:not(.dark) .text-\[\#a1a1aa\] {
-  color: #0b3b82 !important;
-}
-/* Subdued Labels, Timestamps & Step Counts: Muted Aegean Slate */
-html:not(.dark) .text-\[\#71717a\] {
-  color: #5076aa !important;
-}
-/* Subtle Hints & Meta: Aegean Dust */
-html:not(.dark) .text-\[\#52525b\] {
-  color: #6a8dbd !important;
+html:not(.dark) .bg-black\/80,
+html:not(.dark) .bg-black\/70 {
+  background-color: rgba(24, 49, 83, 0.32) !important;
 }
 
+/* Cards read as clean white panels lifted off the warm page */
+html:not(.dark) .bg-\[\#18181b\].rounded-xl {
+  box-shadow: 0 2px 8px rgba(24, 49, 83, 0.05) !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Borders & dividers — one consistent system
+   -------------------------------------------------------------------------- */
+html:not(.dark) .border-\[\#27272a\],
+html:not(.dark) .border-zinc-800,
+html:not(.dark) .border-zinc-900 {
+  border-color: var(--lt-border) !important;
+}
+html:not(.dark) .border-\[\#27272a\]\/60,
+html:not(.dark) .border-\[\#27272a\]\/50 {
+  border-color: #e3e7ee !important;
+}
+html:not(.dark) .border-\[\#3f3f46\],
+html:not(.dark) .border-zinc-700 {
+  border-color: var(--lt-border-strong) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Text hierarchy — primary / secondary / muted, body copy stays neutral
+   -------------------------------------------------------------------------- */
+html:not(.dark) .text-\[\#fafafa\],
+html:not(.dark) .text-zinc-100,
+html:not(.dark) .text-zinc-200 {
+  color: var(--lt-text) !important;
+}
+html:not(.dark) .text-\[\#a1a1aa\],
+html:not(.dark) .text-\[\#71717a\],
+html:not(.dark) .text-zinc-300,
+html:not(.dark) .text-zinc-400 {
+  color: var(--lt-text-2) !important;
+}
+html:not(.dark) .text-\[\#52525b\],
+html:not(.dark) .text-zinc-500 {
+  color: var(--lt-text-3) !important;
+}
 html:not(.dark) .placeholder\:text-\[\#52525b\]::placeholder {
-  color: #8da7cb !important;
+  color: var(--lt-text-3) !important;
 }
 
-/* Hover & Focus States in Light Mode */
+/* Page titles and card headings carry the primary blue */
+html:not(.dark) h1.text-\[\#fafafa\],
+html:not(.dark) .section-card-title {
+  color: var(--lt-primary) !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Status colors — blue interaction, cyan agent, amber XP, green status, red danger
+   -------------------------------------------------------------------------- */
+
+/* Green = success / saved / local / healthy */
+html:not(.dark) .text-\[\#22c55e\],
+html:not(.dark) .text-emerald-400,
+html:not(.dark) .text-emerald-500,
+html:not(.dark) .text-green-400 {
+  color: var(--lt-success) !important;
+}
+html:not(.dark) .text-emerald-200,
+html:not(.dark) .text-emerald-300,
+html:not(.dark) .text-emerald-100 {
+  color: var(--lt-success-ink) !important;
+}
+html:not(.dark) .bg-emerald-950\/30,
+html:not(.dark) .bg-emerald-950\/20,
+html:not(.dark) .bg-emerald-950\/10,
+html:not(.dark) .bg-emerald-950\/5,
+html:not(.dark) .bg-emerald-950\/40,
+html:not(.dark) .bg-emerald-950\/90,
+html:not(.dark) .bg-\[\#22c55e\]\/10,
+html:not(.dark) .bg-\[\#22c55e\]\/15,
+html:not(.dark) .bg-emerald-500\/10 {
+  background-color: var(--lt-green-surface) !important;
+}
+html:not(.dark) .border-emerald-500\/40,
+html:not(.dark) .border-emerald-500\/30,
+html:not(.dark) .border-emerald-500\/20,
+html:not(.dark) .border-\[\#22c55e\]\/30,
+html:not(.dark) .border-\[\#22c55e\]\/20 {
+  border-color: var(--lt-green-border) !important;
+}
+html:not(.dark) .bg-emerald-400,
+html:not(.dark) .bg-\[\#22c55e\] {
+  background-color: var(--lt-success) !important;
+}
+html:not(.dark) .bg-emerald-600 {
+  background-color: var(--lt-success) !important;
+  color: #ffffff !important;
+}
+html:not(.dark) .hover\:bg-emerald-500:hover {
+  background-color: #13a06a !important;
+}
+
+/* Cyan = agent / WebMCP / automation */
+html:not(.dark) .text-sky-400,
+html:not(.dark) .text-sky-500,
+html:not(.dark) .text-sky-600 {
+  color: var(--lt-cyan-ink) !important;
+}
+html:not(.dark) .text-sky-100,
+html:not(.dark) .text-sky-200 {
+  color: #4d6382 !important;
+}
+html:not(.dark) .bg-sky-950\/20,
+html:not(.dark) .bg-sky-950\/40,
+html:not(.dark) .bg-sky-950\/90 {
+  background-color: var(--lt-blue-surface) !important;
+}
+html:not(.dark) .bg-sky-500\/20,
+html:not(.dark) .bg-sky-500\/10 {
+  background-color: var(--lt-cyan-surface) !important;
+}
+html:not(.dark) .border-sky-500\/30,
+html:not(.dark) .border-sky-500\/20 {
+  border-color: var(--lt-blue-border) !important;
+}
+html:not(.dark) .bg-sky-600,
+html:not(.dark) .bg-sky-500 {
+  background-color: var(--lt-cyan) !important;
+  color: #ffffff !important;
+}
+html:not(.dark) .hover\:bg-sky-500:hover,
+html:not(.dark) .hover\:bg-sky-400:hover {
+  background-color: #0a7cb8 !important;
+}
+
+/* Amber = XP / level / combo / attention */
+html:not(.dark) .text-amber-300,
+html:not(.dark) .text-amber-400,
+html:not(.dark) .text-amber-500,
+html:not(.dark) .text-amber-200 {
+  color: var(--lt-amber-ink) !important;
+}
+html:not(.dark) .bg-amber-950\/40,
+html:not(.dark) .bg-amber-950\/20,
+html:not(.dark) .bg-amber-500\/10 {
+  background-color: var(--lt-amber-surface) !important;
+}
+html:not(.dark) .border-amber-500\/40,
+html:not(.dark) .border-amber-500\/30,
+html:not(.dark) .border-amber-500\/20 {
+  border-color: var(--lt-amber-border) !important;
+}
+html:not(.dark) .bg-amber-500 {
+  background-color: #f6b51b !important;
+}
+
+/* Red = destructive / error only — soft surface, strong action button */
+html:not(.dark) .text-red-400,
+html:not(.dark) .text-red-200,
+html:not(.dark) .text-red-100,
+html:not(.dark) .text-rose-400,
+html:not(.dark) .text-rose-500 {
+  color: var(--lt-danger-ink) !important;
+}
+html:not(.dark) .bg-red-950\/40,
+html:not(.dark) .bg-red-950\/10,
+html:not(.dark) .bg-red-950\/90,
+html:not(.dark) .bg-rose-500\/10 {
+  background-color: var(--lt-red-surface) !important;
+}
+html:not(.dark) .border-red-500\/40,
+html:not(.dark) .border-red-500\/30,
+html:not(.dark) .border-red-500\/20,
+html:not(.dark) .border-rose-500\/20 {
+  border-color: var(--lt-red-border) !important;
+}
+html:not(.dark) .bg-red-600,
+html:not(.dark) .bg-rose-500 {
+  background-color: var(--lt-danger) !important;
+  color: #ffffff !important;
+}
+html:not(.dark) .hover\:bg-red-500:hover {
+  background-color: var(--lt-danger-ink) !important;
+}
+/* Description copy inside a danger block stays warm-neutral, never loud */
+html:not(.dark) .bg-red-950\/10 .text-zinc-400,
+html:not(.dark) .bg-red-950\/10 .text-\[\#a1a1aa\] {
+  color: var(--lt-danger-body) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Judge Mode / WebMCP soft-blue panel
+   -------------------------------------------------------------------------- */
+html:not(.dark) .bg-sky-950\/20 .text-foreground {
+  color: var(--lt-primary) !important;
+}
+html:not(.dark) .bg-sky-950\/20 .text-muted-foreground {
+  color: #4d6382 !important;
+}
+html:not(.dark) .bg-sky-500\/20.text-sky-400 {
+  background-color: var(--lt-cyan-surface) !important;
+  border-color: var(--lt-cyan-border) !important;
+  color: var(--lt-cyan-ink) !important;
+}
+html:not(.dark) .bg-sky-500.text-black {
+  background-color: #11bff3 !important;
+  color: #08385a !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Segmented controls — no black containers, active = white + primary blue
+   -------------------------------------------------------------------------- */
+html:not(.dark) .segmented-control {
+  background-color: var(--lt-surface-2) !important;
+  border-color: var(--lt-border) !important;
+}
+html:not(.dark) .segmented-control > button {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #6f7a8c !important;
+  box-shadow: none !important;
+}
+html:not(.dark) .segmented-control > button:hover {
+  background-color: var(--lt-blue-surface) !important;
+  color: var(--lt-primary) !important;
+}
+html:not(.dark) .segmented-control > button.bg-card,
+html:not(.dark) .segmented-control > button.bg-zinc-800,
+html:not(.dark) .segmented-control > button.bg-emerald-600 {
+  background-color: var(--lt-surface) !important;
+  color: var(--lt-primary) !important;
+  border-color: #c9d8f3 !important;
+  box-shadow: inset 0 0 0 1px #c9d8f3, 0 1px 3px rgba(24, 49, 83, 0.08) !important;
+}
+/* Duration picker: the selection is decisive, so it fills with primary blue */
+html:not(.dark) .segmented-control--solid > button.bg-emerald-600 {
+  background-color: var(--lt-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--lt-primary) !important;
+  box-shadow: 0 1px 3px rgba(11, 76, 203, 0.28) !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. Toggles — blue for ON, neutral for OFF
+   -------------------------------------------------------------------------- */
+html:not(.dark) [role="switch"][data-state="checked"] {
+  background-color: var(--lt-primary) !important;
+}
+html:not(.dark) [role="switch"][data-state="unchecked"] {
+  background-color: #d7dce4 !important;
+}
+html:not(.dark) [role="switch"] > span {
+  background-color: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. Hover, focus & control borders
+   -------------------------------------------------------------------------- */
 html:not(.dark) .hover\:bg-\[\#18181b\]:hover,
 html:not(.dark) .hover\:bg-\[\#18181b\]\/70:hover,
 html:not(.dark) .hover\:bg-\[\#18181b\]\/50:hover,
 html:not(.dark) .hover\:bg-\[\#18181b\]\/80:hover,
+html:not(.dark) .hover\:bg-\[\#1f1f23\]:hover,
+html:not(.dark) .hover\:bg-zinc-800:hover,
 html:not(.dark) .focus\:bg-\[\#18181b\]:focus,
 html:not(.dark) .focus-visible\:bg-\[\#18181b\]:focus-visible {
-  background-color: #eaf1fb !important;
+  background-color: var(--lt-blue-surface) !important;
 }
 html:not(.dark) .hover\:bg-\[\#27272a\]:hover,
 html:not(.dark) .focus\:bg-\[\#27272a\]:focus,
 html:not(.dark) .focus-visible\:bg-\[\#27272a\]:focus-visible {
-  background-color: #dde7f6 !important;
+  background-color: #e2ecfd !important;
 }
 html:not(.dark) .hover\:text-\[\#fafafa\]:hover,
 html:not(.dark) .focus\:text-\[\#fafafa\]:focus,
-html:not(.dark) .focus-visible\:text-\[\#fafafa\]:focus-visible {
-  color: #003899 !important;
-}
+html:not(.dark) .focus-visible\:text-\[\#fafafa\]:focus-visible,
 html:not(.dark) .hover\:text-white:hover,
 html:not(.dark) .focus\:text-white:focus,
 html:not(.dark) .focus-visible\:text-white:focus-visible {
-  color: #003899 !important;
+  color: var(--lt-primary-hover) !important;
 }
-html:not(.dark) .hover\:border-\[\#3f3f46\]:hover,
+html:not(.dark) .hover\:border-\[\#3f3f46\]:hover {
+  border-color: var(--lt-border-hover) !important;
+}
 html:not(.dark) .focus\:border-\[\#3f3f46\]:focus,
-html:not(.dark) .focus-visible\:border-\[\#3f3f46\]:focus-visible {
-  border-color: #0047ba !important;
+html:not(.dark) .focus-visible\:border-\[\#3f3f46\]:focus-visible,
+html:not(.dark) .focus-visible\:border-\[\#71717a\]:focus-visible {
+  border-color: var(--lt-primary) !important;
+}
+html:not(.dark) input:focus-visible,
+html:not(.dark) textarea:focus-visible {
+  border-color: var(--lt-primary) !important;
+  box-shadow: 0 0 0 3px rgba(11, 76, 203, 0.15) !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Gradients
+   -------------------------------------------------------------------------- */
+html:not(.dark) .from-\[\#141418\] {
+  --tw-gradient-from: var(--lt-surface-2) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(241 240 234 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+html:not(.dark) .to-\[\#09090b\] {
+  --tw-gradient-to: var(--lt-page) var(--tw-gradient-to-position) !important;
 }
 
 /* Custom Solar & Lunar Liquid Theme Orb Toggle */
@@ -451,40 +743,171 @@ html:not(.dark) .focus-visible\:border-\[\#3f3f46\]:focus-visible {
   }
 }
 
-/* Primary High-Contrast Aegean Blue Buttons */
-html:not(.dark) button.bg-white:not([data-no-theme-invert]),
-html:not(.dark) a.bg-white:not([data-no-theme-invert]),
-html:not(.dark) .bg-white.text-black:not([data-no-theme-invert]) {
-  background-color: #0047ba !important;
-  color: #faf9f5 !important;
-  border-color: #0047ba !important;
+/* --------------------------------------------------------------------------
+   10. Buttons — primary fills cobalt, outline stays white with blue label
+   -------------------------------------------------------------------------- */
+html:not(.dark) button.bg-white:not([data-no-theme-invert]):not(:disabled):not([class*="bg-sky-"]):not([class*="bg-emerald-"]):not([class*="bg-red-"]):not([class*="bg-amber-"]),
+html:not(.dark) a.bg-white:not([data-no-theme-invert]):not([class*="bg-sky-"]):not([class*="bg-emerald-"]):not([class*="bg-red-"]):not([class*="bg-amber-"]),
+html:not(.dark) .bg-white.text-black:not([data-no-theme-invert]):not(:disabled) {
+  background-color: var(--lt-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--lt-primary) !important;
 }
 
-html:not(.dark) button.bg-white:hover:not([data-no-theme-invert]),
-html:not(.dark) a.bg-white:hover:not([data-no-theme-invert]) {
-  background-color: #003899 !important;
+html:not(.dark) button.bg-white:hover:not([data-no-theme-invert]):not([class*="bg-sky-"]):not([class*="bg-emerald-"]):not([class*="bg-red-"]),
+html:not(.dark) a.bg-white:hover:not([data-no-theme-invert]):not([class*="bg-sky-"]):not([class*="bg-emerald-"]):not([class*="bg-red-"]) {
+  background-color: var(--lt-primary-hover) !important;
 }
 
 html:not(.dark) button.bg-white:not([data-no-theme-invert]) svg,
 html:not(.dark) .bg-white.text-black:not([data-no-theme-invert]) svg {
-  color: #faf9f5 !important;
+  color: #ffffff !important;
 }
 
-/* Active navigation item highlight in sidebar */
+/* Outline buttons (`variant="outline"`) */
+html:not(.dark) button.bg-transparent.border-\[\#27272a\]:not(:disabled),
+html:not(.dark) a.bg-transparent.border-\[\#27272a\] {
+  background-color: var(--lt-surface) !important;
+  border-color: var(--lt-border) !important;
+  color: var(--lt-primary) !important;
+}
+html:not(.dark) button.bg-transparent.border-\[\#27272a\]:hover,
+html:not(.dark) a.bg-transparent.border-\[\#27272a\]:hover {
+  background-color: var(--lt-blue-surface) !important;
+  border-color: var(--lt-border-hover) !important;
+}
+
+/* Export is the decisive action, Import is its quieter outline sibling */
+html:not(.dark) button.bg-transparent.border-\[\#27272a\].settings-export-btn {
+  background-color: var(--lt-primary) !important;
+  border-color: var(--lt-primary) !important;
+  color: #ffffff !important;
+}
+html:not(.dark) button.bg-transparent.border-\[\#27272a\].settings-export-btn:hover {
+  background-color: var(--lt-primary-hover) !important;
+  border-color: var(--lt-primary-hover) !important;
+}
+html:not(.dark) button.settings-export-btn svg,
+html:not(.dark) button.settings-export-btn div.text-zinc-500 {
+  color: #ffffff !important;
+}
+html:not(.dark) button.settings-export-btn div.text-zinc-500 {
+  opacity: 0.85;
+}
+html:not(.dark) button.settings-import-btn div.text-zinc-500 {
+  color: var(--lt-text-2) !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. Sidebar
+   -------------------------------------------------------------------------- */
+html:not(.dark) aside.bg-\[\#09090b\] {
+  background-color: #f4f3ed !important;
+}
+html:not(.dark) aside nav a .text-\[\#a1a1aa\],
+html:not(.dark) aside nav a.text-\[\#a1a1aa\] {
+  color: #234a88 !important;
+}
+html:not(.dark) aside nav a:hover {
+  background-color: var(--lt-blue-surface) !important;
+}
 html:not(.dark) aside a.bg-\[\#18181b\] {
-  background-color: #e2edfa !important;
-  color: #0047ba !important;
-  border-color: #b9d3f4 !important;
+  background-color: #e9f2ff !important;
+  color: var(--lt-primary) !important;
+  border-color: #a9ccff !important;
+}
+html:not(.dark) aside a.bg-\[\#18181b\] .text-\[\#fafafa\] {
+  color: var(--lt-primary) !important;
 }
 
-/* Progress bar fill & tracks */
+/* Main Quest widget */
+html:not(.dark) aside .bg-\[\#18181b\] p.text-\[\#fafafa\] {
+  color: var(--lt-primary) !important;
+}
+html:not(.dark) aside a.bg-\[\#09090b\].border-\[\#27272a\] {
+  background-color: var(--lt-primary) !important;
+  border-color: var(--lt-primary) !important;
+  color: #ffffff !important;
+}
+html:not(.dark) aside a.bg-\[\#09090b\].border-\[\#27272a\]:hover {
+  background-color: var(--lt-primary-hover) !important;
+  border-color: var(--lt-primary-hover) !important;
+}
+html:not(.dark) aside a.bg-\[\#09090b\].border-\[\#27272a\] svg {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* --------------------------------------------------------------------------
+   12. Top toolbar
+   -------------------------------------------------------------------------- */
+html:not(.dark) header .bg-secondary\/40 {
+  background-color: var(--lt-surface) !important;
+  border-color: var(--lt-border) !important;
+  color: var(--lt-primary) !important;
+}
+html:not(.dark) header .bg-secondary\/40:hover {
+  background-color: var(--lt-blue-surface) !important;
+  border-color: var(--lt-border-hover) !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. Progress fills
+   -------------------------------------------------------------------------- */
 html:not(.dark) .bg-emerald-500,
 html:not(.dark) .bg-green-500 {
-  background-color: #0047ba !important;
+  background-color: var(--lt-primary) !important;
 }
-html:not(.dark) .bg-emerald-500\/10,
 html:not(.dark) .bg-green-500\/10 {
-  background-color: rgba(0, 71, 186, 0.1) !important;
+  background-color: rgba(11, 76, 203, 0.1) !important;
+}
+
+/* --------------------------------------------------------------------------
+   13b. Legacy light accents realigned to the cobalt primary
+   -------------------------------------------------------------------------- */
+html:not(.dark) .bg-\[\#0047ba\] {
+  background-color: var(--lt-primary) !important;
+}
+html:not(.dark) .border-\[\#0047ba\] {
+  border-color: var(--lt-primary) !important;
+}
+html:not(.dark) .border-\[\#0047ba\]\/40 {
+  border-color: #a9ccff !important;
+}
+html:not(.dark) .focus-visible\:ring-\[\#0047ba\]:focus-visible {
+  --tw-ring-color: rgba(11, 76, 203, 0.35) !important;
+}
+
+/* Status dots keep their meaning without going dark or neon */
+html:not(.dark) .bg-\[\#71717a\] {
+  background-color: var(--lt-text-3) !important;
+}
+html:not(.dark) .bg-\[\#3f3f46\] {
+  background-color: var(--lt-border-strong) !important;
+}
+html:not(.dark) .bg-amber-400 {
+  background-color: #f6b51b !important;
+}
+html:not(.dark) .text-amber-300\/90 {
+  color: var(--lt-amber-ink) !important;
+}
+
+/* --------------------------------------------------------------------------
+   14. Disabled states — dimmed, never invisible
+   -------------------------------------------------------------------------- */
+html:not(.dark) button:disabled[class],
+html:not(.dark) button[disabled][class],
+html:not(.dark) a[aria-disabled="true"][class] {
+  opacity: 1 !important;
+  background-color: var(--lt-disabled-bg) !important;
+  border-color: var(--lt-disabled-border) !important;
+  color: var(--lt-disabled-text) !important;
+  box-shadow: none !important;
+}
+html:not(.dark) button:disabled[class] svg,
+html:not(.dark) button[disabled][class] svg,
+html:not(.dark) button:disabled[class] *,
+html:not(.dark) button[disabled][class] * {
+  color: var(--lt-disabled-text) !important;
 }
 
 /* Custom subtle scrollbar */

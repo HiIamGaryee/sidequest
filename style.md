@@ -4,7 +4,7 @@
 
 SIDEQUEST uses a focused productivity-game UI with two visual modes:
 
-- Light mode: warm limestone surfaces with Aegean blue accents
+- Light mode: warm off-white surfaces, white cards, and cobalt blue accents
 - Dark mode: monochrome HUD styling with high-contrast neutral surfaces
 
 The interface should always feel:
@@ -28,15 +28,27 @@ The interface should always feel:
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--background` | `#e5e3db` | App background |
-| `--foreground` | `#0047ba` | Primary text and emphasis |
-| `--card` | `#faf9f5` | Card surfaces |
-| `--card-foreground` | `#0b3b82` | Card text |
-| `--secondary` | `#eaf1fc` | Secondary fills |
-| `--muted` | `#dedbd0` | Muted surfaces |
-| `--muted-foreground` | `#5076aa` | Secondary text |
-| `--border` | `#d3cfc4` | Borders and dividers |
-| `--primary` | `#0047ba` | Primary action color |
+| `--background` | `#f7f6f1` | App background (warm off-white) |
+| `--foreground` | `#183153` | Primary text |
+| `--card` | `#ffffff` | Card surfaces |
+| `--card-foreground` | `#183153` | Card text |
+| `--secondary` | `#eef5ff` | Soft blue surface |
+| `--muted` | `#f1f0ea` | Secondary surface |
+| `--muted-foreground` | `#5f6f86` | Secondary text |
+| `--border` | `#d9dee7` | Borders and dividers |
+| `--primary` | `#0b4ccb` | Primary action color |
+
+Light-mode surfaces, ink and status colors are also exposed as `--lt-*` variables on
+`html:not(.dark)` in `src/index.css`. That block is the single source of truth for the
+light theme; every rule in it is gated on `html:not(.dark)` so Dark Theme is unaffected.
+
+| Extra light token | Value | Use |
+| --- | --- | --- |
+| `--lt-surface-inset` | `#f7f9fc` | Inset panels inside cards |
+| `--lt-border-strong` | `#c8cfdb` | Emphasised borders |
+| `--lt-text-3` | `#8a94a6` | Muted labels |
+| `--lt-cyan` | `#0b8fd3` | Agent / WebMCP actions |
+| `--lt-disabled-bg` / `--lt-disabled-text` | `#f4f5f7` / `#a1a8b4` | Disabled controls (opacity stays `1`) |
 
 ### Dark Mode
 
@@ -55,10 +67,18 @@ The interface should always feel:
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--xp` | blue or white by theme | XP and progress |
+| `--xp` | amber in light, white in dark | XP and progress |
 | `--focus` | blue in light, green in dark | Focus states |
 | `--success` | green | Success feedback |
 | `--warning` | amber | Alerts and caution states |
+
+Status color rules:
+
+- Blue is primary interaction and selection
+- Cyan is agent / WebMCP / automation
+- Amber is XP, level, combo and attention
+- Green is reserved for success, saved, local and healthy status
+- Red is destructive and error only, on a soft surface with a strong action button
 
 ## Typography
 

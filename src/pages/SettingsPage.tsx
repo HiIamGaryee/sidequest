@@ -174,7 +174,7 @@ export function SettingsPage() {
                     High-contrast dark HUD or crisp light theme
                   </p>
                 </div>
-                <ThemeToggle variant="segmented" />
+                <ThemeToggle variant="segmented" className="segmented-control" />
               </div>
 
               <Separator className="bg-[#27272a]" />
@@ -186,7 +186,7 @@ export function SettingsPage() {
                     Minimize transition animations for distraction-free focus
                   </p>
                 </div>
-                <div className="flex items-center gap-1 bg-[#18181b] p-0.5 rounded-lg border border-[#27272a]">
+                <div className="segmented-control flex items-center gap-1 bg-[#18181b] p-0.5 rounded-lg border border-[#27272a]">
                   <button
                     type="button"
                     onClick={() => setReducedMotion("system")}
@@ -244,7 +244,7 @@ export function SettingsPage() {
                     Standard duration when launching a new Focus Session
                   </p>
                 </div>
-                <div className="flex items-center gap-1 bg-[#18181b] p-0.5 rounded-lg border border-[#27272a]">
+                <div className="segmented-control segmented-control--solid flex items-center gap-1 bg-[#18181b] p-0.5 rounded-lg border border-[#27272a]">
                   {[15, 25, 45, 60].map((mins) => (
                     <button
                       key={mins}
@@ -418,7 +418,7 @@ export function SettingsPage() {
                 <Button
                   variant="outline"
                   onClick={exportData}
-                  className="w-full border-[#27272a] hover:bg-zinc-800 text-zinc-200 text-xs gap-2 justify-start h-10"
+                  className="settings-export-btn w-full border-[#27272a] hover:bg-zinc-800 text-zinc-200 text-xs gap-2 justify-start h-10"
                 >
                   <Download className="w-4 h-4 text-emerald-400" />
                   <div className="text-left">
@@ -438,7 +438,7 @@ export function SettingsPage() {
                   <Button
                     variant="outline"
                     onClick={() => fileInputRef.current?.click()}
-                    className="w-full border-[#27272a] hover:bg-zinc-800 text-zinc-200 text-xs gap-2 justify-start h-10"
+                    className="settings-import-btn w-full border-[#27272a] hover:bg-zinc-800 text-zinc-200 text-xs gap-2 justify-start h-10"
                   >
                     <Upload className="w-4 h-4 text-sky-400" />
                     <div className="text-left">

@@ -35,7 +35,7 @@ export function SectionCard({
         <CardHeader className="flex flex-row items-start justify-between space-y-0 p-5 pb-3">
           <div className="space-y-1">
             {title && (
-              <CardTitle className="text-sm font-semibold tracking-tight text-[#fafafa]">{title}</CardTitle>
+              <CardTitle className="section-card-title text-sm font-semibold tracking-tight text-[#fafafa]">{title}</CardTitle>
             )}
             {description && (
               <CardDescription className="text-xs text-[#71717a]">{description}</CardDescription>
